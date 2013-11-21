@@ -34,7 +34,33 @@ class Vector3D:public Vector<T,3>
 
 };
 
+template <typename T, int size>
+Vector<T, size>::~Vector()
+{
+    delete [] data;
+}
 
+template <typename T, int size>
+Vector<T, size>::Vector(const Vector<T, size>& A)
+{
+    D = new T[size];
+    for (unsigned int i = 0; i < size; i++)
+    {
+        D[i] = A.D[i];
+    }
+}
+
+template <typename T, int size>
+Vector<T, size>& Vector<T, size>::operator =(const Vector<T, size>& RHS)
+{
+    delete [] D;
+    D = new T[size];
+    for(unsigned int i = 0; i < size; i++)
+    {
+        D[i] = RHS.D[i];
+    }
+    return *this;
+}
 
 
 #endif // VECTOR_H
